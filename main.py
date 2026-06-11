@@ -1,7 +1,7 @@
 from src import utils
 
 
-word, guessed_letters, errors, game_is_over = utils.create_game()
+word, guessed_letters, errors = utils.create_game()
 
 while True:
 
@@ -21,20 +21,12 @@ while True:
 
     if errors == 6:
         print('Ты проиграл!')
-        game_is_over = True
+        word, guessed_letters, errors = utils.ask_for_continiu()
 
     # todo переписать на множества
-    if utils.player_win(word, guessed_letters):
+    elif utils.player_win(word, guessed_letters):
         print('Победа! Слово угадано!')
         utils.print_secret_word(word, guessed_letters)
-        game_is_over = True
+        word, guessed_letters, errors = utils.ask_for_continiu()
 
-    if game_is_over:
-        replay = input('Начать игру заново? (да/нет) ')
 
-        if replay == 'да':
-            word, guessed_letters, errors, game_is_over = utils.create_game()
-            continue
-        else:
-            print('Игра завершена!')
-            exit()
