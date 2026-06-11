@@ -22,8 +22,5 @@ while True:
     elif utils.player_win(word, guessed_letters):
         print('Победа! Слово угадано!')
 
-
     if errors == 6 or utils.player_win(word, guessed_letters):
         word, guessed_letters, errors = utils.ask_for_continue()
-
-
