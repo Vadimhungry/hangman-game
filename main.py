@@ -1,11 +1,10 @@
 import random
-import utils
+from src import utils
 
-words = ['цветок']
 
 while True:
 
-    word = random.choice(words)
+    word = utils.get_secret_word('src/words.txt')
     guessed_letters = []
     errors = 0
 
@@ -29,7 +28,8 @@ while True:
             print('Ты проиграл!')
             break
 
-        if len(guessed_letters) == len(word):
+        # todo переписать на множества
+        if utils.player_win(word, guessed_letters):
             print('Победа! Слово угадано!')
             utils.print_secret_word(word, guessed_letters)
             break

@@ -1,4 +1,5 @@
-from pictures import *
+from src.pictures import *
+import random
 
 # печать виселицы
 def print_hangman(errors):
@@ -31,3 +32,14 @@ def print_secret_word(word, guessed_letters):
             print('_', end=' ')
 
     print('\n')
+
+def player_win(word, guessed_letters):
+    for index in range(len(word)):
+        if index not in guessed_letters:
+            return False
+    return True
+
+def get_secret_word(path):
+    with open(path, 'r') as file:
+        words = file.read().splitlines()
+    return random.choice(words)
