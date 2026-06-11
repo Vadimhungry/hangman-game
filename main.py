@@ -4,8 +4,8 @@ import utils
 words = ['цветок']
 
 while True:
-    word = random.choice(words)
 
+    word = random.choice(words)
     guessed_letters = []
     errors = 0
 
