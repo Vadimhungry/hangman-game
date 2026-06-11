@@ -1,43 +1,40 @@
-import random
 from src import utils
 
 
+word, guessed_letters, errors, game_is_over = utils.create_game()
+
 while True:
 
-    word = utils.get_secret_word('src/words.txt')
-    guessed_letters = []
-    errors = 0
+    utils.print_hangman(errors)
+    utils.print_secret_word(word, guessed_letters)
 
-    while True:
+    guess = input('Угадай букву: ')
 
-        utils.print_hangman(errors)
-        utils.print_secret_word(word, guessed_letters)
+    if guess in word:
 
-        guess = input('Угадай букву: ')
+        for num, letter in enumerate(word):
+            if letter == guess:
+                guessed_letters.append(num)
 
-        if guess in word:
-
-            for num, letter in enumerate(word):
-                if letter == guess:
-                    guessed_letters.append(num)
-
-        else:
-            errors += 1
-
-        if errors == 6:
-            print('Ты проиграл!')
-            break
-
-        # todo переписать на множества
-        if utils.player_win(word, guessed_letters):
-            print('Победа! Слово угадано!')
-            utils.print_secret_word(word, guessed_letters)
-            break
-
-    replay = input('Начать игру заново? (да/нет) ')
-
-    if replay == 'да':
-        continue
     else:
-        print('Игра завершена!')
-        exit()
+        errors += 1
+
+    if errors == 6:
+        print('Ты проиграл!')
+        game_is_over = True
+
+    # todo переписать на множества
+    if utils.player_win(word, guessed_letters):
+        print('Победа! Слово угадано!')
+        utils.print_secret_word(word, guessed_letters)
+        game_is_over = True
+
+    if game_is_over:
+        replay = input('Начать игру заново? (да/нет) ')
+
+        if replay == 'да':
+            word, guessed_letters, errors, game_is_over = utils.create_game()
+            continue
+        else:
+            print('Игра завершена!')
+            exit()

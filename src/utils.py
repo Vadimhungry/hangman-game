@@ -39,7 +39,15 @@ def player_win(word, guessed_letters):
             return False
     return True
 
-def get_secret_word(path):
-    with open(path, 'r') as file:
+def get_secret_word():
+    with open('src/words.txt', 'r') as file:
         words = file.read().splitlines()
     return random.choice(words)
+
+def create_game():
+    word = get_secret_word()
+    guessed_letters = []
+    errors = 0
+    game_is_over = False
+    return word, guessed_letters, errors, game_is_over
+
