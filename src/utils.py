@@ -23,10 +23,10 @@ def print_hangman(errors):
 # печать слова с отгаданными и закрытыми буквами
 def print_secret_word(word, guessed_letters):
 
-    for num in range(len(word)):
+    for letter in word:
 
-        if num in guessed_letters:
-            print(word[num], end=' ')
+        if letter in guessed_letters:
+            print(letter, end=' ')
 
         else:
             print('_', end=' ')
@@ -34,8 +34,8 @@ def print_secret_word(word, guessed_letters):
     print('\n')
 
 def player_win(word, guessed_letters):
-    for index in range(len(word)):
-        if index not in guessed_letters:
+    for letter in word:
+        if letter not in guessed_letters:
             return False
     return True
 
@@ -46,11 +46,11 @@ def get_secret_word():
 
 def create_game():
     word = get_secret_word()
-    guessed_letters = []
+    guessed_letters = set()
     errors = 0
     return word, guessed_letters, errors
 
-def ask_for_continiu():
+def ask_for_continue():
     replay = input('Начать игру заново? (да/нет) ')
 
     if replay == 'да':
