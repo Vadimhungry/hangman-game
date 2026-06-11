@@ -1,4 +1,5 @@
 import random
+import utils
 
 words = ['цветок']
 
@@ -10,15 +11,8 @@ while True:
 
     while True:
 
-        # рааспечатываем слово с отгаданными буквами
-        for num in range(len(word)):
-
-            if num in guessed_letters:
-                print(word[num], end=' ')
-
-            else:
-                print('_', end=' ')
-        print('\n')
+        utils.print_hangman(errors)
+        utils.print_secret_word(word, guessed_letters)
 
         guess = input('Угадай букву: ')
 
@@ -27,8 +21,6 @@ while True:
             for num, letter in enumerate(word):
                 if letter == guess:
                     guessed_letters.append(num)
-
-
 
         else:
             errors += 1
@@ -39,16 +31,7 @@ while True:
 
         if len(guessed_letters) == len(word):
             print('Победа! Слово угадано!')
-
-            # рааспечатываем слово с отгаданными буквами
-            for num in range(len(word)):
-
-                if num in guessed_letters:
-                    print(word[num], end=' ')
-
-                else:
-                    print('_', end=' ')
-            print('\n')
+            utils.print_secret_word(word, guessed_letters)
             break
 
     replay = input('Начать игру заново? (да/нет) ')
